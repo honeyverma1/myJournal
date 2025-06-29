@@ -2,20 +2,25 @@ package JournalApp.myJournal.service;
 
 import JournalApp.myJournal.entity.User;
 import JournalApp.myJournal.reposiory.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class UserService {
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 
     @Autowired
     private UserRepository userRepository;
@@ -25,9 +30,14 @@ public class UserService {
     }
 
     public void saveNewUser(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(Arrays.asList("USER"));
-        userRepository.save(user);
+        try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setRoles(Arrays.asList("USER"));
+            userRepository.save(user);
+        }  catch (Exception e) {
+            log.warn("User Already Exixts : {}", user.getUsername(), e);
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "User Already Exixts");
+        }
     }
 
 

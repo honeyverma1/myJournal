@@ -21,13 +21,18 @@ public class JournalEntryService {
     @Autowired
     private UserService userService;
 
+
     @Transactional
     public void saveEntry(JournalEntry journalEntry, String username){
-        journalEntry.setDate(LocalDateTime.now());
-        User user = userService.findByUserName(username);
-        JournalEntry saved = journalEntryRepository.save(journalEntry);
-        user.getJournalEntries().add(saved);
-        userService.saveUser(user);
+        try {
+            journalEntry.setDate(LocalDateTime.now());
+            User user = userService.findByUserName(username);
+            JournalEntry saved = journalEntryRepository.save(journalEntry);
+            user.getJournalEntries().add(saved);
+            userService.saveUser(user);
+        } catch (Exception e) {
+            throw new RuntimeException("An error occurred while ");
+        }
     }
 
     public List<JournalEntry> getAll(){
