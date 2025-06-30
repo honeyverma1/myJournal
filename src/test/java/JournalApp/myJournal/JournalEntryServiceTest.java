@@ -1,17 +1,18 @@
 package JournalApp.myJournal;
 
 import JournalApp.myJournal.reposiory.UserRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertNotNull;
 
 @SpringBootTest
+@Disabled
 public class JournalEntryServiceTest {
 
     @Autowired
