@@ -21,6 +21,8 @@ public class SpringSecurity {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
+
+    // checking git repo connections
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(request  -> request
