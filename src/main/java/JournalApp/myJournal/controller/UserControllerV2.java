@@ -5,7 +5,6 @@ import JournalApp.myJournal.entity.JournalEntry;
 import JournalApp.myJournal.entity.User;
 import JournalApp.myJournal.service.UserService;
 import JournalApp.myJournal.service.WeatherService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,9 +46,9 @@ public class UserControllerV2 {
 
 
     @GetMapping
-    public ResponseEntity<?> getingsUser() {
+    public ResponseEntity<?> greetingsUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        WeatherResponse response = weatherService.getWeather("Mumbai");
+        WeatherResponse response = weatherService.getWeather("Noida");
         String greetings = "";
         if(response != null) {
             greetings = " , Weather feels like " + response.getCurrent().getFeelslike() + " °C";
