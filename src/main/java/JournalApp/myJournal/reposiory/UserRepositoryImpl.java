@@ -15,11 +15,6 @@ public class UserRepositoryImpl {
 
     public List<User> getUserForSA() {
         Query query = new Query();
-
-//        query.addCriteria(Criteria.where("email").exists(true));
-//        query.addCriteria(Criteria.where("email").ne(null).ne(""));
-//        Instead of writing these, we can just check email convention and its regular expression
-
         query.addCriteria(Criteria.where("email").regex("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"));
         query.addCriteria(Criteria.where("sentimentAnalysis").is(true));
 
