@@ -27,7 +27,7 @@ public class JournalEntryControllerV2 {
     @Autowired
     private UserService userService;
 
-        @GetMapping
+        @GetMapping("/display")
         public ResponseEntity<?> getEntriesByUser() {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
@@ -41,7 +41,7 @@ public class JournalEntryControllerV2 {
 
 
 
-        @PostMapping
+        @PostMapping("/create")
         public ResponseEntity<?> createEntry(@RequestBody JournalEntry myEntry) {
             try {
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
